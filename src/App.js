@@ -51,6 +51,10 @@ const files = {
     },
     {
       name: "package.json"
+    },
+    {
+      name:"empty",
+      children:[]
     }
   ]
 }
