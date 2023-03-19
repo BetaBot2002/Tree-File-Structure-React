@@ -2,74 +2,77 @@ import './App.css';
 import { useState } from 'react';
 
 
-const files={
-  name:"main",
-  children:[
+const files = {
+  name: "main",
+  children: [
     {
-      name:"public",
-      children:[
+      name: "public",
+      children: [
         {
-          name:"index.html"
+          name: "index.html"
         },
         {
-          name:"images",
-          children:[
+          name: "images",
+          children: [
             {
-              name:"Image1.jpg"
+              name: "Image1.jpg"
             },
             {
-              name:"Image2.png"
+              name: "Image2.png"
             }
           ]
         },
         {
-          name:"videos",
-          children:[
+          name: "videos",
+          children: [
             {
-              name:"video1.mkv"
+              name: "video1.mkv"
             },
             {
-              name:"video2.mp4"
+              name: "video2.mp4"
             }
           ]
         },
         {
-          name:"output.txt"
+          name: "output.txt"
         }
       ]
     },
     {
-      name:"src",
-      children:[
+      name: "src",
+      children: [
         {
-          name:"App.css"
+          name: "App.css"
         },
         {
-          name:"App.js"
+          name: "App.js"
         }
       ]
     },
     {
-      name:"package.json"
+      name: "package.json"
     }
   ]
 }
 
-function Entry({entry,depth}){
-const [isExpanded,setExpanded]=useState(false);
-
+function Entry({ entry, depth }) {
+  const [isExpanded, setExpanded] = useState(false);
+  const handleClick = (e) => {
+    setExpanded(!isExpanded)
+    console.log(e)
+  }
 
   return <div>
-    <div onClick={()=> setExpanded(!isExpanded)} style={entry.children && {cursor:`pointer`}}>
-      {entry.children && (isExpanded?"📂":"📁")}
+    <div onClick={handleClick} style={entry.children && { cursor: `pointer` }}>
+      {entry.children && (isExpanded ? "📂" : "📁")}
       {!entry.children && "📄"}
       {entry.name}
     </div>
-    {isExpanded &&(
-      <div style={{paddingLeft:`${depth*10}px`}}>
-        {entry.children?.map((entry)=>(
-          <Entry entry={entry} depth={depth+1}/>
-      ))}
+    {isExpanded && (
+      <div style={{ paddingLeft: `${depth * 10}px` }}>
+        {entry.children?.map((entry) => (
+          <Entry entry={entry} depth={depth + 1} />
+        ))}
       </div>
     )}
   </div>
@@ -78,8 +81,8 @@ const [isExpanded,setExpanded]=useState(false);
 function App() {
   return (
     <div className="App">
-      {files.children.map((entry)=>(
-        <Entry entry={entry} depth={1}/>
+      {files.children.map((entry) => (
+        <Entry entry={entry} depth={1} />
       ))}
     </div>
   );
